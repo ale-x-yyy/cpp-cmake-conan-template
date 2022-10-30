@@ -1,0 +1,66 @@
+{
+  "version": 6,
+  "configurePresets": [
+    {
+      "name": "default",
+      "description": "The top-level default configuration",
+      "hidden": true,
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/${hostSystemName}",
+      "cacheVariables": {
+        "CMAKE_POLICY_DEFAULT_CMP0077": "NEW",
+        "CMAKE_POLICY_DEFAULT_CMP0091": "NEW",
+        "CMAKE_POLICY_DEFAULT_CMP0092": "NEW",
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/${presetName}"
+      }
+    },
+    {
+      "name": "windows-x64-base",
+      "description": "The base configurations for all x64-Windows targets",
+      "inherits": "default",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "cl",
+        "CMAKE_CXX_COMPILER": "cl"
+      },
+      "architecture": {
+        "value": "x64",
+        "strategy": "external"
+      }
+    },
+    {
+      "name": "windows-x64-debug",
+      "displayName": "Windows x64 (Debug)",
+      "inherits": "windows-x64-base",
+      "description": "",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "windows-x64-release",
+      "displayName": "Windows x64 (Release)",
+      "inherits": "windows-x64-base",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "windows-x64-debug",
+      "displayName": "Windows x64 (Debug)",
+      "description": "",
+      "configurePreset": "windows-x64-debug",
+      "configuration": "Debug"
+    },
+    {
+      "name": "windows-x64-release",
+      "displayName": "Windows x64 (Release)",
+      "description": "",
+      "configurePreset": "windows-x64-release",
+      "configuration": "RelWithDebInfo"
+    }
+  ],
+  "testPresets": []
+}
